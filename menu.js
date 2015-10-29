@@ -178,7 +178,7 @@ Menu.prototype.renderFooter = function(ctx) {
   ctx.font = '16px csfont';
   ctx.textAlign = 'end';
   ctx.fillStyle = 'hsla(0, 0%, 70%, 1)';
-  ctx.fillText('C-Soko: 2013 - Marcis Berzins - mb13@inbox.lv', 780, 450);
+  ctx.fillText('C-Soko: 2013 - MB - mb13@mail.lv', 780, 450);
   ctx.font = '12px csfont';
   ctx.fillText('Sokoban: 1981 - Hiroyuki Imabayashi - http://sokoban.jp/', 780, 470);
   ctx.fillText('Telegrama Font: 2011 - YOFonts - http://www.yoworks.com/', 780, 490);
