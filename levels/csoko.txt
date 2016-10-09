@@ -1,4 +1,4 @@
-TITLE|C-Soko|AUTHOR|MB Auto-Generated|MAIL|mb13@inbox.lv|WEB|http://mb13.allalla.com/csoko/|
+TITLE|C-Soko|AUTHOR|MB Auto-Generated|MAIL|mb13@inbox.lv|
 ;Two Boxes 1
 #####
 #.$@#
