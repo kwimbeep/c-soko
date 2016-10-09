@@ -19,6 +19,7 @@ Restart:          R
 Confirm complete: Enter, Space, F  
 Change level:     Page Up, Page Down  
 Back to title:    Esc, BkSp
+
 Fullscreen:       F4, Alt+Enter
 
 ### License
