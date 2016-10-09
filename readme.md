@@ -19,7 +19,7 @@ Restart:          R
 Confirm complete: Enter, Space, F  
 Change level:     Page Up, Page Down  
 Back to title:    Esc, BkSp  
-Fullscreen:       F4, Alt+Enter 
+Fullscreen:       F4, Alt+Enter
 
 ### License
 This program is licensed under the terms of the [GNU General Public License](http://www.gnu.org/licenses/gpl-3.0.txt).
