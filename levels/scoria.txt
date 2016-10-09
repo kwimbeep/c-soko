@@ -1,4 +1,4 @@
-TITLE|Scoria |AUTHOR|Thomas Reinke|MAIL|thoms545@yahoo.com|
+TITLE|Scoria|AUTHOR|Thomas Reinke|MAIL|thoms545@yahoo.com|
 ;1
   ####
   #  #
