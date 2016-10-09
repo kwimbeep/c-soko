@@ -9,7 +9,7 @@ Control player with keyboard or mouse.
 Play:              Enter, Space, F  
 Change collection: Up, Down, W, S  
 Change level:      Left, Right, A, D  
-Delete save:       Del
+Delete save:       Del  
 Fullscreen:        F4, Alt+Enter
 
 ### Game controls
@@ -18,8 +18,7 @@ Undo:             Z, U, Q
 Restart:          R  
 Confirm complete: Enter, Space, F  
 Change level:     Page Up, Page Down  
-Back to title:    Esc, BkSp
-
+Back to title:    Esc, BkSp  
 Fullscreen:       F4, Alt+Enter
 
 ### License
