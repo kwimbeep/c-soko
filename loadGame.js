@@ -1,7 +1,7 @@
 /*********************************
  C-Soko - loadGame.js (2013)
- Author: MB
- Mail: mb13@mail.lv
+ Author: Marcis Berzins
+ Mail: berzins.marcis@gmail.com
  This program is licensed under the terms of the GNU General Public License: http://www.gnu.org/licenses/gpl-3.0.txt
  *********************************/
 

@@ -6,14 +6,20 @@
 <title>C-Soko</title>
 <style>
 @font-face {font-family:csfont; src:url('telegrama.otf');}
+.font_loader {visibility:hidden; position:absolute; font-family:csfont;}
 body {font-size:1em; font-family:monospace; color:#555555; text-align:center;}
-canvas {-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;}
+#game_container {display:table; margin:auto;}
+#game_container div {display:table-cell; vertical-align:middle;}
+canvas {user-select:none; -moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;}
+canvas {image-rendering: crisp-edges; image-rendering: pixelated; image-rendering: -moz-crisp-edges; -ms-interpolation-mode: nearest-neighbor;}
+#fullscreen_button {cursor:pointer; display:table; width:20px; height:20px; border:3px solid #999999; margin:auto; user-select:none; -moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;}
 h3, h4 {font-size:1.5em; font-weight:normal; margin:0px; padding:0px;}
 h4 {font-size:1.2em; margin:0px; margin-top:10px;}
 </style>
 </head>
 <body>
- <canvas id="game">Sorry, no canvas for you! Get a browser!</canvas>
+ <div class="font_loader">Load</div>
+ <div id="game_container"><div><canvas id="game">Sorry, no canvas for you! Get a browser!</canvas></div></div>
  <!--p>
   A box pushing game. Implementation of the classic puzzle game Sokoban that was invented in Japan.<br />
   Includes C-Soko original level collection as well as several other known and less known Sokoban level collections.<br />
@@ -36,6 +42,7 @@ h4 {font-size:1.2em; margin:0px; margin-top:10px;}
   Change level:     Page Up, Page Down
   Back to title:    Esc
  </pre-->
+ <div id="fullscreen_button" title="Fullscreen"></div>
  <script src="loadGame.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 /*********************************
- C-Soko - entities.js (2013)
- Author: MB
- Mail: mb13@mail.lv
+ C-Soko - entities.js (2016)
+ Author: Marcis Berzins
+ Mail: berzins.marcis@gmail.com
  This program is licensed under the terms of the GNU General Public License: http://www.gnu.org/licenses/gpl-3.0.txt
  *********************************/
 
@@ -14,6 +14,7 @@ function Map(fName) {
   this.lWidth = 0; this.lHeight = 0;
   this.tileSizes = [50, 40, 30, 20, 10, 5];
   this.tileSize = this.tileSizes[0];
+  this.shadowScaleFactor = 1;
   this.colorPool = [];
   this.colorPool.push({ bg: 'hsla(272, 37%, 92%, 1)', border: 'hsla(250, 43%, 83%, 1)', wall: 'hsla(24, 21%, 55%, 1)', box: 'hsla(187, 76%, 59%, 0.5)', player: 'hsla(55, 25%, 30%, 0.5)' });
   this.colorPool.push({ bg: 'hsla(40, 32%, 85%, 1)', border: 'hsla(195, 18%, 53%, 0.3)', wall: 'hsla(195, 18%, 53%, 1)', box: 'hsla(40, 32%, 85%, 0.5)', player: 'hsla(61, 49%, 23%, 0.5)' });
@@ -55,7 +56,7 @@ Map.prototype.render = function(ctx) {
   ctx.strokeStyle = this.colors.border;
   ctx.lineWidth = 2;
   ctx.strokeRect(this.left, this.top, this.width, this.height);
-  if (this.tileSize < 20) { this.renderSimple(ctx, this.lLeft, this.lTop); return; }
+  if (this.tileSize < 20) { this.renderSimple(ctx, this.lLeft, this.lTop, this.tileSize); return; }
   for (var i = 0; i < this.level.length; i++) {
     for (var j = 0; j < this.level[i].length; j++) {
       var tX = this.lLeft + (this.tileSize * j); var tY = this.lTop + (this.tileSize * i);
@@ -66,9 +67,9 @@ Map.prototype.render = function(ctx) {
   this.player.render(ctx);
 };
 
-Map.prototype.renderSimple = function(ctx, l, t, calculateLocally) {
+Map.prototype.renderSimple = function(ctx, l, t, s, calculateLocally) {
   if (calculateLocally === undefined) calculateLocally = false;
-  var s = this.tileSize, tX, tY, tR;
+  var tX, tY, tR;
   for (var i = 0; i < this.level.length; i++) {
     for (var j = 0; j < this.level[i].length; j++) {
       tX = l + (s * j); tY = t + (s * i);
@@ -424,11 +425,12 @@ Movable.prototype.setCoords = function(x, y) {
 };
 
 Movable.prototype.updateDetails = function() {
+  scaleFactor = this.map.shadowScaleFactor;
   this.details.borderWidth = Math.floor(this.map.tileSize / 10);
   this.details.margin = Math.floor(this.details.borderWidth / 2);
   this.details.size = this.map.tileSize - (2 * (this.details.borderWidth + Math.ceil(this.details.margin / 2)));
-  this.details.shadowOffset = Math.ceil(this.map.tileSize / 30);
-  this.details.shadowBlur = Math.floor(this.details.borderWidth / 2);
+  this.details.shadowOffset = Math.ceil(this.map.tileSize / 30 * scaleFactor);
+  this.details.shadowBlur = Math.floor(this.details.borderWidth / 2 * scaleFactor);
   this.details.borderWidth = (this.details.borderWidth % 2 === 0) ? this.details.borderWidth : this.details.borderWidth + 0.5;
   var tilesPerSecond = 5;
   this.moveAnimation.speed = this.map.tileSize * tilesPerSecond;

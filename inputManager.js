@@ -1,14 +1,23 @@
 /*********************************
- C-Soko - inputManager.js (2013)
- Author: MB
- Mail: mb13@mail.lv
+ C-Soko - inputManager.js (2016)
+ Author: Marcis Berzins
+ Mail: berzins.marcis@gmail.com
  This program is licensed under the terms of the GNU General Public License: http://www.gnu.org/licenses/gpl-3.0.txt
  *********************************/
+
+// global: game
 
 function InputManager() {
   this.events = [];
   this.keys = {};
   this.pointer = {x: 0, y: 0, down: false};
+  this.getMouseCoordinates = function(e) {
+    var r = game.canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - r.left) / game.scaleFactor,
+      y: (e.clientY - r.top) / game.scaleFactor
+    };
+  };
   document.body.addEventListener("keydown", function(e) { game.inputManager.handleKeyDown(e); }, false);
   document.body.addEventListener("keyup", function(e) { game.inputManager.handleKeyUp(e); }, false);
   document.body.addEventListener("mousedown", function(e) { game.inputManager.handleMouseDown(e); }, false);
@@ -24,7 +33,7 @@ InputManager.prototype.handleMouseUp = function(e) { this.handleMouse(e, 'pointe
 InputManager.prototype.handleMouseMove = function(e) { this.handleMouse(e, 'pointerMove'); };
 
 InputManager.prototype.handleMouse = function(e, type) {
-  var c = getMouseCoordinates(game.canvas, e);
+  var c = this.getMouseCoordinates(e);
   this.events.push({
     type: type,
     x: c.x,
@@ -35,7 +44,7 @@ InputManager.prototype.handleMouse = function(e, type) {
 };
 
 InputManager.prototype.handleKeyDown = function(e) { this.handleKey(e, 'keyDown'); this.keys[e.keyCode] = true; };
-InputManager.prototype.handleKeyUp = function(e) { this.handleKey(e, 'keyUp'); this.keys[e.keyCode] = false; };
+InputManager.prototype.handleKeyUp = function(e) { if ((e.keyCode === 115) || (e.keyCode === 13 && e.altKey)) { toggleFullscreen(); e.preventDefault(); return false; } this.handleKey(e, 'keyUp'); this.keys[e.keyCode] = false; };
 
 InputManager.prototype.handleKey = function(e, type) {
   if ((e.keyCode === 33) || (e.keyCode === 34) || (e.keyCode === 37) || (e.keyCode === 38) || (e.keyCode === 39) || (e.keyCode === 40)) { e.preventDefault(); }

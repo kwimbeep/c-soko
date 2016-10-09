@@ -1,7 +1,7 @@
 /*********************************
  C-Soko - menu.js (2013)
- Author: MB
- Mail: mb13@mail.lv
+ Author: Marcis Berzins
+ Mail: berzins.marcis@gmail.com
  This program is licensed under the terms of the GNU General Public License: http://www.gnu.org/licenses/gpl-3.0.txt
  *********************************/
 
@@ -10,7 +10,6 @@ function Menu(game) {
   this.returnScreen = this.game.SCREENS.MENU;
   this.menu = new TitleMenu();
   this.info = new TitleInfo(this.game.map.stats);
-  this.tSize = 0;
   this.colorPool = [];
   this.colorPool.push({ bg: 'hsla(0, 7%, 92%, 1)', line1: 'hsla(217, 20%, 70%, 1)', line2: 'hsla(13, 71%, 80%, 1)' });
   this.colorPool.push({ bg: 'hsla(37, 14%, 89%, 1)', line1: 'hsla(265, 16%, 74%, 1)', line2: 'hsla(134, 25%, 75%, 1)' });
@@ -32,7 +31,6 @@ Menu.prototype.update = function() {
   var map = this.game.map;
   if (!map.loaded) { return; }
   if (map.loaded && this.justLoaded) {
-    this.setPreviewSize();
     this.justLoaded = false;
     this.drawLevel = true;
   }
@@ -44,7 +42,6 @@ Menu.prototype.update = function() {
           case this.game.KEYS.PAGEDOWN:
           case this.game.KEYS.LEFT:
             map.loadPrevLevel();
-            this.setPreviewSize();
             this.game.inputManager.resetKeys();
             this.game.inputManager.resetPointer();
             break;
@@ -52,7 +49,6 @@ Menu.prototype.update = function() {
           case this.game.KEYS.PAGEUP:
           case this.game.KEYS.RIGHT:
             map.loadNextLevel();
-            this.setPreviewSize();
             this.game.inputManager.resetKeys();
             this.game.inputManager.resetPointer();
             break;
@@ -70,7 +66,6 @@ Menu.prototype.update = function() {
           case this.game.KEYS.F:
           case this.game.KEYS.ENTER:
           case this.game.KEYS.SPACE:
-            map.tileSize = this.tSize;
             this.drawLevel = false;
             this.returnScreen = this.game.SCREENS.PLAY;
             break;
@@ -97,7 +92,6 @@ Menu.prototype.update = function() {
         var button = this.menu.clickable.check(event.x, event.y, false, false);
         switch (button) {
           case 'play':
-            map.tileSize = this.tSize;
             this.drawLevel = false;
             this.returnScreen = this.game.SCREENS.PLAY;
             break;
@@ -115,13 +109,11 @@ Menu.prototype.update = function() {
             break;
           case 'prevLevel':
             map.loadPrevLevel();
-            this.setPreviewSize();
             this.game.inputManager.resetKeys();
             this.game.inputManager.resetPointer();
             break;
           case 'nextLevel':
             map.loadNextLevel();
-            this.setPreviewSize();
             this.game.inputManager.resetKeys();
             this.game.inputManager.resetPointer();
             break;
@@ -131,11 +123,6 @@ Menu.prototype.update = function() {
   }
 };
 
-Menu.prototype.setPreviewSize = function() {
-  this.tSize = this.game.map.tileSize;
-  this.game.map.tileSize = 10;
-};
-
 Menu.prototype.render = function() {
   var ctx = this.game.ctx;
   ctx.save();
@@ -143,7 +130,7 @@ Menu.prototype.render = function() {
   this.renderTitle(ctx);
   if (this.drawLevel) {
     ctx.globalAlpha = 0.5;
-    this.game.map.renderSimple(ctx, 20, 100, true);
+    this.game.map.renderSimple(ctx, 20, 100, 10, true);
     ctx.globalAlpha = 1;
     this.info.render(ctx);
   }
@@ -178,7 +165,7 @@ Menu.prototype.renderFooter = function(ctx) {
   ctx.font = '16px csfont';
   ctx.textAlign = 'end';
   ctx.fillStyle = 'hsla(0, 0%, 70%, 1)';
-  ctx.fillText('C-Soko: 2013 - MB - mb13@mail.lv', 780, 450);
+  ctx.fillText('C-Soko: 2015 - MB - mb13@inbox.lv', 780, 450);
   ctx.font = '12px csfont';
   ctx.fillText('Sokoban: 1981 - Hiroyuki Imabayashi - http://sokoban.jp/', 780, 470);
   ctx.fillText('Telegrama Font: 2011 - YOFonts - http://www.yoworks.com/', 780, 490);

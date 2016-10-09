@@ -1,7 +1,7 @@
 /*********************************
- C-Soko - play.js (2013)
- Author: MB
- Mail: mb13@mail.lv
+ C-Soko - play.js (2016)
+ Author: Marcis Berzins
+ Mail: berzins.marcis@gmail.com
  This program is licensed under the terms of the GNU General Public License: http://www.gnu.org/licenses/gpl-3.0.txt
  *********************************/
 
@@ -54,6 +54,7 @@ Play.prototype.handleEvents = function() {
       case 'keyUp':
         switch (event.key) {
           case this.game.KEYS.ESC:
+          case this.game.KEYS.BKSP:
             this.returnScreen = this.game.SCREENS.MENU;
             handled = true; break;
           case this.game.KEYS.R:
