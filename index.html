@@ -7,42 +7,55 @@
 <style>
 @font-face {font-family:csfont; src:url('telegrama.otf');}
 .font_loader {visibility:hidden; position:absolute; font-family:csfont;}
-body {font-size:1em; font-family:monospace; color:#555555; text-align:center;}
+body {font-size:1em; font-family:Tahoma, Verdana, sans-serif; color:#646464; letter-spacing:0.1em; text-align:center;}
+body a {color:#969696; text-decoration:none;}
+body a:hover {text-decoration:underline;}
 #game_container {display:table; margin:auto;}
 #game_container div {display:table-cell; vertical-align:middle;}
 canvas {user-select:none; -moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;}
 canvas {image-rendering: crisp-edges; image-rendering: pixelated; image-rendering: -moz-crisp-edges; -ms-interpolation-mode: nearest-neighbor;}
 #fullscreen_button {cursor:pointer; display:table; width:20px; height:20px; border:3px solid #999999; margin:auto; user-select:none; -moz-user-select:none; -webkit-user-select:none; -ms-user-select:none;}
-h3, h4 {font-size:1.5em; font-weight:normal; margin:0px; padding:0px;}
-h4 {font-size:1.2em; margin:0px; margin-top:10px;}
 </style>
 </head>
 <body>
  <div class="font_loader">Load</div>
  <div id="game_container"><div><canvas id="game">Sorry, no canvas for you! Get a browser!</canvas></div></div>
- <!--p>
-  A box pushing game. Implementation of the classic puzzle game Sokoban that was invented in Japan.<br />
-  Includes C-Soko original level collection as well as several other known and less known Sokoban level collections.<br />
-  Push all boxes on to the goals. Boxes can't be pulled or pushed more than one at a time.<br />
-  Control player with keyboard or mouse.
- </p>
- <h4>Title controls</h4>
- <pre>
-  Play:              Enter, Space, F
-  Change collection: Up, Down, W, S
-  Change level:      Left, Right, A, D
-  Delete save:       Del
- </pre>
- <h4>Game controls</h4>
- <pre>
-  Move/Push:        Left, Right, Up, Down, W, S, A, D
-  Undo:             Z, U, Q
-  Restart:          R
-  Confirm complete: Enter, Space, F
-  Change level:     Page Up, Page Down
-  Back to title:    Esc
- </pre-->
  <div id="fullscreen_button" title="Fullscreen"></div>
  <script src="loadGame.js"></script>
+ 
+ <div style="width:780px; margin:auto; text-align:left;">
+  <p>
+   A box pushing game.
+  </p>
+  <p>
+   Implementation of the classic puzzle game Sokoban invented in Japan. Includes C-Soko original level collection as well as several other known and less known Sokoban level collections.
+  </p>
+  <p>
+   Push all boxes on to the goals. Boxes can't be pulled or pushed more than one at a time. Control player with keyboard or mouse.
+  </p>
+  
+  <h4>Title controls</h4>
+  <pre>
+Play:              Enter, Space, F
+Change collection: Up, Down, W, S
+Change level:      Left, Right, A, D
+Delete save:       Del
+Fullscreen:        F4, Alt+Enter</pre>
+
+  <h4>Game controls</h4>
+  <pre>
+Move/Push:         Left, Right, Up, Down, W, S, A, D
+Undo:              Z, U, Q
+Restart:           R
+Confirm complete:  Enter, Space, F
+Change level:      Page Up, Page Down
+Back to title:     Esc
+Fullscreen:        F4, Alt+Enter</pre>
+
+ <p class="spacer">
+  <a href="levels/csoko.txt" download>Download</a> C-Soko level collection (Collection license: <a href="http://www.wtfpl.net/txt/copying/">WTFPL</a>).
+ </p>
+ </div>
+ 
 </body>
 </html>
