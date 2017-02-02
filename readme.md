@@ -1,7 +1,9 @@
 # C-Soko
 A box pushing game.  
-Implementation of the classic puzzle game Sokoban. Includes C-Soko original level collection as well as several other known and less known Sokoban level collections.  
-Push all boxes on to the goals. Boxes can't be pulled or pushed more than one at a time. Control player with keyboard or mouse.
+Implementation of the classic puzzle game Sokoban.  
+Includes C-Soko original level collection as well as several other known and less known Sokoban level collections.  
+Push all boxes on to the goals. Boxes can't be pulled or pushed more than one at a time.  
+Control player with keyboard or mouse.
 
 ### Title controls
 Play:              Enter, Space, F  
