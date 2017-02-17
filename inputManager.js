@@ -1,15 +1,15 @@
 /*********************************
- C-Soko - inputManager.js (2016)
- Author: Marcis Berzins
- Mail: berzins.marcis@gmail.com
+ Lines - managers/input.js
+ Copyright © 2017 Marcis Berzins (berzins.marcis@gmail.com)
  This program is licensed under the terms of the GNU General Public License: http://www.gnu.org/licenses/gpl-3.0.txt
  *********************************/
 
 // global: game
 
 function InputManager() {
+  this.KEYS = { ENTER: 13, CONTROL: 17, ESC: 27, SPACE: 32, PAGEUP: 33, PAGEDOWN: 34, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, DELETE: 46, A: 65, D: 68, F: 70, K: 75, Q: 81, R: 82, S: 83, U: 85, W: 87, Z: 90 };
   this.events = [];
-  this.keys = {};
+  this.keysDown = {};
   this.pointer = {x: 0, y: 0, down: false};
   this.getMouseCoordinates = function(e) {
     var r = game.canvas.getBoundingClientRect();
@@ -20,12 +20,15 @@ function InputManager() {
   };
   document.body.addEventListener("keydown", function(e) { game.inputManager.handleKeyDown(e); }, false);
   document.body.addEventListener("keyup", function(e) { game.inputManager.handleKeyUp(e); }, false);
-  document.body.addEventListener("mousedown", function(e) { game.inputManager.handleMouseDown(e); }, false);
-  document.body.addEventListener("mouseup", function(e) { game.inputManager.handleMouseUp(e); }, false);
-  document.body.addEventListener("mousemove", function(e) { game.inputManager.handleMouseMove(e); }, false);
-  document.body.addEventListener("touchstart", function(e) { game.inputManager.handleTouchStart(e); }, false);
-  document.body.addEventListener("touchend", function(e) { game.inputManager.handleTouchEnd(e); }, false);
-  document.body.addEventListener("touchmove", function(e) { game.inputManager.handleTouchMove(e); }, false);
+  if ('ontouchstart' in document.documentElement) {
+    document.body.addEventListener("touchstart", function(e) { game.inputManager.handleTouchStart(e); }, false);
+    document.body.addEventListener("touchend", function(e) { game.inputManager.handleTouchEnd(e); }, false);
+    document.body.addEventListener("touchmove", function(e) { game.inputManager.handleTouchMove(e); }, false);
+  } else {
+    document.body.addEventListener("mousedown", function(e) { game.inputManager.handleMouseDown(e); }, false);
+    document.body.addEventListener("mouseup", function(e) { game.inputManager.handleMouseUp(e); }, false);
+    document.body.addEventListener("mousemove", function(e) { game.inputManager.handleMouseMove(e); }, false);
+  }
 }
 
 InputManager.prototype.handleMouseDown = function(e) { this.handleMouse(e, 'pointerDown'); this.pointer.down = true; };
@@ -43,11 +46,11 @@ InputManager.prototype.handleMouse = function(e, type) {
   this.pointer.y = c.y;
 };
 
-InputManager.prototype.handleKeyDown = function(e) { this.handleKey(e, 'keyDown'); this.keys[e.keyCode] = true; };
-InputManager.prototype.handleKeyUp = function(e) { if ((e.keyCode === 115) || (e.keyCode === 13 && e.altKey)) { toggleFullscreen(); e.preventDefault(); return false; } this.handleKey(e, 'keyUp'); this.keys[e.keyCode] = false; };
+InputManager.prototype.handleKeyDown = function(e) { this.handleKey(e, 'keyDown'); this.keysDown[e.keyCode] = true; };
+InputManager.prototype.handleKeyUp = function(e) { this.handleKey(e, 'keyUp'); this.keysDown[e.keyCode] = false; };
 
 InputManager.prototype.handleKey = function(e, type) {
-  if ((e.keyCode === 33) || (e.keyCode === 34) || (e.keyCode === 37) || (e.keyCode === 38) || (e.keyCode === 39) || (e.keyCode === 40)) { e.preventDefault(); }
+  if ((e.keyCode === 32) || (e.keyCode === 33) || (e.keyCode === 34) || (e.keyCode === 37) || (e.keyCode === 38) || (e.keyCode === 39) || (e.keyCode === 40)) { e.preventDefault(); }
   this.events.push({
     type: type,
     key: e.keyCode
@@ -69,7 +72,7 @@ InputManager.prototype.handleTouch = function(e, type) {
 
 InputManager.prototype.getEvent = function() {
   if (this.events.length) {
-    return this.events.pop();
+    return this.events.shift();
   } else {
     return false;
   }
@@ -80,8 +83,8 @@ InputManager.prototype.resetEvents = function() {
 };
 
 InputManager.prototype.resetKeys = function() {
-  delete this.keys;
-  this.keys = {};
+  delete this.keysDown;
+  this.keysDown = {};
 };
 
 InputManager.prototype.resetPointer = function() {
