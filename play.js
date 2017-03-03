@@ -111,9 +111,9 @@ Play.prototype.handleEvents = function() {
     var tY = player.y + direction.y;
     if ((tX != player.x) || (tY != player.y)) { if (player.checkMove(tX, tY)) { this.pMove = true; } }
   }
-  for (var p in this.game.inputManager.keys) {
+  for (var p in this.game.inputManager.keysDown) {
     if (map.eventLocks) { return; }
-    if (this.game.inputManager.keys[p]) {
+    if (this.game.inputManager.keysDown[p]) {
       var tX = player.x;
       var tY = player.y;
       switch (parseInt(p, 10)) {

@@ -47,10 +47,11 @@ InputManager.prototype.handleMouse = function(e, type) {
 };
 
 InputManager.prototype.handleKeyDown = function(e) { this.handleKey(e, 'keyDown'); this.keysDown[e.keyCode] = true; };
-InputManager.prototype.handleKeyUp = function(e) { this.handleKey(e, 'keyUp'); this.keysDown[e.keyCode] = false; };
+InputManager.prototype.handleKeyUp = function(e) { if ((e.keyCode === 115) || (e.keyCode === 13 && e.altKey)) { toggleFullscreen(); e.preventDefault(); return false; } this.handleKey(e, 'keyUp'); this.keysDown[e.keyCode] = false; };
+
 
 InputManager.prototype.handleKey = function(e, type) {
-  if ((e.keyCode === 32) || (e.keyCode === 33) || (e.keyCode === 34) || (e.keyCode === 37) || (e.keyCode === 38) || (e.keyCode === 39) || (e.keyCode === 40)) { e.preventDefault(); }
+  if ((e.keyCode === 33) || (e.keyCode === 34) || (e.keyCode === 37) || (e.keyCode === 38) || (e.keyCode === 39) || (e.keyCode === 40)) { e.preventDefault(); }
   this.events.push({
     type: type,
     key: e.keyCode
